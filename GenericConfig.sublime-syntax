@@ -34,26 +34,36 @@ contexts:
         2: comment.line.double-dash.genconfig
         3: comment.line.double-slash.genconfig
       scope: meta.comment.genconfig
-    # ; one line comment
-    - match: (?:(?:^\s*)|\s+);\s*(?=.).*(?:\n)?$
-      scope: comment.line.number-sign.genconfig
 
-    - match: \b(?:\d+\.){3}\d+(?:\:\d+)?\b
+    # ; one line comment
+    - match: (?:(?:^\s*)|\s+)(;\s*(?=.).*(?:\n)?)$
+      scope: meta.comment.genconfig
+      captures:
+        1: comment.line.number-sign.genconfig
+
+    # IP
+    - match: \b(?:\d+\.){3}\d+(?:(?:\:|\/)\d+)?\b
       scope: meta.ip.genconfig constant.other.genconfig
 
     # Number or number with unit (like 10k, 12M, 92dpi etc) and also hex like values 0xdf
     - match: \b[0-9]+([a-zA-Z]+)?\b
       scope: constant.numeric.genconfig
 
+    # "function call: name()"
+    - match: \b(\w+)\b\(
+      scope: meta.function.genconfig
+      captures:
+        1: entity.name.function.genconfig
+
     # Constant
-    - match: \b([tT]rue|[fF]alse|TRUE|FALSE)\b
+    - match: \b(?i:true|false)\b
       scope: constant.language.genconfig
 
     # Constant
-    - match: \b(?<!-)([oO]n|[oO]ff|ON|OFF|[yY]es|[nN]o|YES|NO|[nN]ull|NULL|[nN]one|NONE|nan|NaN|NAN)(?!-)\b
+    - match: \b(?<!-)(?i:on|off|yes|no|null|none|nan)(?!-)\b
       scope: constant.language.genconfig
 
-    # "One line word, or word with following {, or [word] or <word>"
+    # One line word, or word with following {, or [word] or <word>
     - match: (?:^\s*(\w+)\s*(?={))|(?:^\s*(\w+)\s*$)|(^\s*\[.*\]\s*$)|(^\s*\<.*\>\s*$)
       scope: storage.type.genconfig
 
@@ -90,25 +100,19 @@ contexts:
       scope: meta.param.genconfig
       captures:
         1: variable.parameter.genconfig
-        2: keyword.other.genconfig
+        2: keyword.operator.genconfig
 
     # RegExp
     - match: \^.*\$
       scope: string.regexp.genconfig
 
     # Operators
-    - match: (!|\~|%|=|\^|\+|\-|\<|\>|\?|\/|\*|\|)
+    - match: (!|\~|%|=|\^|\+|\-|\<|\>|\?|\/|\*|\\|\||\:|\.|\,)
       scope: keyword.operator.genconfig
 
     # Mime types (text/plain, application/x-javascript etc)
     - match: \b(?<!/)[\w\-\.\+]+/[\w\-\.\+]+(?!/)\b
       scope: support.type.genconfig
-
-    # "function call: name()"
-    - match: \b(\w+)\b\(
-      scope: meta.function.genconfig
-      captures:
-        1: entity.name.function.genconfig
 
   double_string:
       - meta_scope: string.quoted.double.genconfig
