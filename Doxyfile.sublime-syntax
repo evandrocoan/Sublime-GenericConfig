@@ -1,0 +1,12 @@
+%YAML 1.2
+---
+name: Doxygen
+file_extensions:
+  - Doxyfile
+scope: text.doxygen
+contexts:
+  main:
+    - match: ''
+      push: Packages/GenericConfig/GenericConfig.sublime-syntax
+
+
