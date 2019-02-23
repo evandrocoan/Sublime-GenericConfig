@@ -5,6 +5,7 @@ file_extensions:
   - cfg
   - conf
   - config
+  - sample
   - ini
   - pro
   - mak
