@@ -10,8 +10,6 @@ file_extensions:
   - pro
   - mak
   - mk
-  - inputrc
-  - .inputrc
   - dircolors
   - .dircolors
   - gitmodules
