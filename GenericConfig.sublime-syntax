@@ -34,7 +34,7 @@ contexts:
       scope: meta.comment.genconfig
 
     # ; one line comment
-    - match: (?:(?:^\s*)|\s+)(;\s*(?=.).*(?:\n)?)$
+    - match: (?:(?:^\s*)|\s+)(;.*(?:\n)?)$
       scope: meta.comment.genconfig
       captures:
         1: comment.line.number-sign.genconfig
